@@ -1,4 +1,4 @@
-const User = require('../models/user.model')
+const User = require('../models/users.model')
 
 const register = async (req,res) => {
     try{
@@ -21,7 +21,7 @@ const register = async (req,res) => {
         })
     }
     catch(err){
-        return res.status(400).json({
+        return res.status(503).json({
             success: false,
             message : err.message
         })

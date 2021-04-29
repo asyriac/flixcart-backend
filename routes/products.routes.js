@@ -1,4 +1,5 @@
 const express = require('express');
+const { createProduct } = require('../controllers/products.controller');
 const router = express.Router();
 
 router
@@ -6,6 +7,7 @@ router
     .get((req,res)=>{
         res.send("Fetch all products...")
     })
+    .post(createProduct)
 
 
 module.exports = router;
