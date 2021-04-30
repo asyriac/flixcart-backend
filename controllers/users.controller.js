@@ -28,6 +28,35 @@ const register = async (req,res) => {
     }
 }
 
+const login = async (req,res) => {
+    try{
+        const user = await User.findOne({"username":req.body.username})
+        if(user === null){
+            return res.status(403).json({
+                success:false,
+                message: "User does not exist."
+            })
+        }
+        if(req.body.password !== user.password){
+            return res.status(403).json({
+                success:false,
+                message: "Invalid credentials."
+            })
+        }
+        return res.status(200).json({
+            success:true,
+            message: "Logged in"
+        })
+    }
+    catch(err){
+        return res.status(503).json({
+            success: false,
+            message : err.message
+        })
+    }
+}
+
 module.exports = {
-    register
+    register,
+    login
 }
