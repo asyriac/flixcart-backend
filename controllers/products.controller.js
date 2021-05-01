@@ -19,11 +19,13 @@ const createProduct = async (req, res) => {
 
 const getAllProducts = async (req,res) => {
     try{
-        const products = await Product.find({});
-        console.log(products);
+        const products = await Product.find({});        
+        const jsonResult = products.map((item)=>{
+            return {...item._doc, id: item._id};
+        })
         return res.status(200).json({
             success: true,
-            data : products
+            data : {products:jsonResult}
         })
     }
     catch(err){

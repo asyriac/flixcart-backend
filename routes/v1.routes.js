@@ -4,6 +4,9 @@ const router = express.Router();
 const products = require('./products.routes');
 router.use("/products", products);
 
+const cart = require('./cart.routes');
+router.use('/cart',cart);
+
 const users = require('./users.routes');
 router.use("/users",users);
 
