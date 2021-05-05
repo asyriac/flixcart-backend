@@ -7,6 +7,9 @@ router.use("/products", products);
 const cart = require('./cart.routes');
 router.use('/cart',cart);
 
+const wishlist = require('./wishlist.routes')
+router.use('/wishlist',wishlist);
+
 const users = require('./users.routes');
 router.use("/users",users);
 
