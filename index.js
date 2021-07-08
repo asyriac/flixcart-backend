@@ -1,25 +1,33 @@
-const express = require('express');
-const cors = require('cors')
-require('dotenv').config();
-
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// cookie parser setup
+app.use(cookieParser());
+
 // cors setup
-app.use(cors())
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000"],
+    optionsSuccessStatus: 200,
+  })
+);
 
 // body parser setup
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
 // DB setup
-const initDB = require('./db')
+const initDB = require("./db");
 initDB();
 
 // Routes setup
-const routes = require('./routes/v1.routes')
-app.use('/api/v1',routes)
+const routes = require("./routes/v1.routes");
+app.use("/api/v1", routes);
 
-
-app.listen(PORT, ()=> console.log(`Server started on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
