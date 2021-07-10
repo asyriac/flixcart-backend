@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 3000;
 // cookie parser setup
 app.use(cookieParser());
 
+// body parser setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // cors setup
 app.use(
   cors({
@@ -17,10 +21,6 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
-
-// body parser setup
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // DB setup
 const initDB = require("./db");
