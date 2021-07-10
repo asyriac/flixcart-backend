@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: ["https://flixcart.netlify.app"],
+    origin: [process.env.FRONTEND_APP_URL],
     optionsSuccessStatus: 200,
   })
 );
