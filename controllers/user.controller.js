@@ -46,11 +46,8 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password);
   const user = await User.findOne({ username });
-  console.log(user);
   const isAuthenticated = await compare(password, user.password);
-  console.log(isAuthenticated);
   if (isAuthenticated) {
     setTokenToCookie(user.id, res);
     user.password = undefined;
@@ -88,7 +85,6 @@ const logoutUser = (req, res) => {
 const currentUser = async (req, res) => {
   const userId = req.decodedToken.id;
 
-  console.log(userId);
   const user = await User.findById(userId);
 
   return res.status(200).json({

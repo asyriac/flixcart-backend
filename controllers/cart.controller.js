@@ -28,7 +28,6 @@ const updateItemInCart = async (req, res) => {
     const user = req.decodedToken.id;
     const qty = req.body.qty;
     const result = await Cart.findOneAndUpdate({ _id, user }, { qty });
-    console.log(result);
     return res.status(201).json({ success: true });
   } catch (err) {
     return res.json({ success: false, message: err.message });
@@ -46,9 +45,20 @@ const deleteItemFromCart = async (req, res) => {
   }
 };
 
+const placeOrder = async (req, res) => {
+  try {
+    const user = req.decodedToken.id;
+    await Cart.deleteMany({ user });
+    return res.status(201).json({ success: true });
+  } catch (err) {
+    return res.json({ success: false, message: err.message });
+  }
+};
+
 module.exports = {
   getCart,
   addToCart,
   updateItemInCart,
   deleteItemFromCart,
+  placeOrder,
 };
